@@ -33,6 +33,13 @@
       in
       {
         packages.default = pkg;
+        packages.container = pkgs.dockerTools.buildImage {
+          name = "hello-docker";
+          tag = "latest";
+          config = {
+            Cmd = [ "${pkg}/bin/${name}" ];
+          };
+        };
         devShells = {
           default = pkgs.mkShellNoCC {
             packages = with pkgs; [
