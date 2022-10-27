@@ -1,0 +1,11 @@
+*
+!/**/*.py
+!/.envrc
+!/.gitignore
+!/README.md
+!/dagger.cue
+!/flake.nix
+!/pyproject.toml
+!/{{"flake.lock"}}
+!/{{"poetry.lock"}}
+!/{{cookiecutter.project_slug}}

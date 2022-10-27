@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "{{cookiecutter.project_id}}"
+version = "0.1.0"
+description = ""
+authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
+license = "{{cookiecutter.license}}"
+readme = "README.md"
+packages = [{include = "{{cookiecutter.project_slug}}"}]
+
+[tool.poetry.dependencies]
+python = "^{{cookiecutter.python_version}}"
+
+# {% if cookiecutter.has_cli %}
+[tool.poetry.scripts]
+"{{cookiecutter.project_id}}" = '{{cookiecutter.project_slug}}.cli:main'
+# {% endif %}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
