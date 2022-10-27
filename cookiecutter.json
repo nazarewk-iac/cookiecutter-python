@@ -10,5 +10,8 @@
   "project_id": "{{ cookiecutter.project_slug.replace('_', '-') }}",
   "pypi_username": "{{ cookiecutter.github_username }}",
   "license": "MIT",
-  "has_cli": "y"
+  "has_cli": "y",
+  "_copy_without_render": [
+    "**/cue.mod/pkg"
+  ]
 }
