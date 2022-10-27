@@ -12,6 +12,6 @@
   "license": "MIT",
   "has_cli": "y",
   "_copy_without_render": [
-    "**/cue.mod/pkg"
+    "cue.mod/pkg/**"
   ]
 }
