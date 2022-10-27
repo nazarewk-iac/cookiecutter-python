@@ -6,7 +6,7 @@ import (
 	"universe.dagger.io/bash"
 )
 
-#NixBuild: {
+#NixFlakeImageBuild: {
 	src:             dagger.#FS
 	filename:        string | *"image.tar.gz"
 	flakePackageKey: string | *"container"
@@ -24,7 +24,7 @@ import (
 			echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
 			nix build --show-trace "/src#\(flakePackageKey)"
 			mkdir -p /out
-			mv "$(readlink -f result)" /out/\(filename)
+			mv "$(readlink -f result)" "/out/\(filename)"
 			"""
 	}
 }
@@ -34,7 +34,7 @@ dagger.#Plan & {
 		".": read: contents:      dagger.#FS
 		"./out": write: contents: actions.build.outDir
 	}
-	actions: build: #NixBuild & {
+	actions: build: #NixFlakeImageBuild & {
 		src: client.filesystem.".".read.contents
 	}
 }
