@@ -51,7 +51,7 @@
         };
         # inspired by https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
         # usage: nix run '.#repl'
-        repl = {
+        apps.repl = {
           type = "app";
           program = "${pkgs.writeShellScriptBin "repl" ''
             confnix=$(mktemp)
