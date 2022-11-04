@@ -5,6 +5,8 @@
 !/README.md
 !/cue.mod/
 !/dagger.cue
+!/{{"flake.lock"}}
 !/flake.nix
+!/{{"poetry.lock"}}
 !/pyproject.toml
 !/{{cookiecutter.project_slug}}

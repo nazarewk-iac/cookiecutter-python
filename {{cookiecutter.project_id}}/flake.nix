@@ -49,19 +49,18 @@
             ];
           };
         };
-        # see https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
+        # inspired by https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
         # usage: nix run '.#repl'
-        apps.repl = {
+        repl = {
           type = "app";
           program = "${pkgs.writeShellScriptBin "repl" ''
-                confnix=$(mktemp)
-                echo "builtins.getFlake (toString $(git rev-parse --show-toplevel))" >$confnix
-                trap "rm $confnix" EXIT
-                nix repl $confnix
-              ''}/bin/repl";
+            confnix=$(mktemp)
+            trap "rm '$confnix' || true" EXIT
+            echo "builtins.getFlake (toString "$PWD")" >$confnix
+            nix repl "$confnix"
+          ''}/bin/repl";
         };
       };
-    flake = {
-    };
+    flake = { };
   };
 }

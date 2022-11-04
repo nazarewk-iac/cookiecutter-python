@@ -1,6 +1,6 @@
 {
   "project_version": "0.1.0",
-  "python_version": "3.10",
+  "python_version": "3.11",
   "project_name": "Python Boilerplate",
   "project_short_description": "Python Boilerplate contains all the boilerplate you need to create a Python package.",
   "full_name": "Krzysztof Nazarewski",
@@ -11,6 +11,9 @@
   "pypi_username": "{{ cookiecutter.github_username }}",
   "license": "MIT",
   "has_cli": "y",
+  "has_trio": "n",
+  "has_http": "n",
+  "has_time": "n",
   "_copy_without_render": [
     "cue.mod/pkg/**"
   ]
