@@ -3,10 +3,12 @@
 !/.envrc
 !/.gitignore
 !/README.md
+!/config.nix
 !/cue.mod/
 !/dagger.cue
-!/{{"flake.lock"}}
+!/default.nix
 !/flake.nix
-!/{{"poetry.lock"}}
 !/pyproject.toml
+!/{{"flake.lock"}}
+!/{{"poetry.lock"}}
 !/{{cookiecutter.project_slug}}

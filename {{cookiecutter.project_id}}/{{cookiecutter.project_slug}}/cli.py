@@ -28,8 +28,10 @@ async def main():
 
 
 if __name__ == "__main__":
-    # {% if cookiecutter.has_trio == "y" %}
-    main(_anyio_backend="trio")
-    # {% else %}
-    main()
-    # {% endif %}
+    _kwargs = dict(
+        auto_envvar_prefix="{{ cookiecutter.env_prefix }}",
+        # {% if cookiecutter.has_trio == "y" %}
+        _anyio_backend="trio",
+        # {% endif %}
+    )
+    main(**_kwargs)
