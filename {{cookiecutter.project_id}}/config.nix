@@ -1,5 +1,7 @@
 { pkgs, ... }:
 let
+  inherit (pkgs) lib;
+
   attrs = {
     python = pkgs."python{{cookiecutter.python_version.replace('.', '')}}";
     projectDir = ./.;

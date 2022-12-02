@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { self, flake-parts, ... }: flake-parts.lib.mkFlake { inherit self; } {
+  outputs = { self, nixpkgs, flake-parts, poetry2nix, ... }: flake-parts.lib.mkFlake { inherit self; } {
     imports = [
     ];
 
