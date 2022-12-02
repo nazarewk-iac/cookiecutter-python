@@ -8,7 +8,7 @@
   "github_username": "nazarewk",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_id": "{{ cookiecutter.project_slug.replace('_', '-') }}",
-  "env_prefix": "{{ cookiecutter.project_id.upper() }}",
+  "env_prefix": "{{ cookiecutter.project_slug.upper() }}",
   "pypi_username": "{{ cookiecutter.github_username }}",
   "license": "MIT",
   "has_cli": "y",
