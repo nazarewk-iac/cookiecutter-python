@@ -17,10 +17,12 @@ let
   name = cfg.tool.poetry.name;
   pkg = pkgs.poetry2nix.mkPoetryApplication (attrs // { });
   env = pkgs.poetry2nix.mkPoetryEnv (attrs // {
+    # groups = [ "dev" "test" ];
     editablePackageSources = { "${name}" = attrs.projectDir; };
   });
 in
 {
   inherit pkg env cfg;
+  inherit (attrs) python;
   bin = "${pkg}/bin/${name}";
 }

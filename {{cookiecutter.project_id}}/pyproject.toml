@@ -12,20 +12,27 @@ python = "^{{cookiecutter.python_version}}"
 
 # {% if cookiecutter.has_http == "y" %}
 # HTTP
-httpx = "^0.23.0"
+httpx = "^0.25.0"
 # {% endif %}
 
 # {% if cookiecutter.has_cli == cookiecutter.has_trio == "y" %}
 # CLI
 asyncclick = "^8.1.3.4"
 # {% elif cookiecutter.has_cli  == "y" %}
-click = "^8.1.3"
+click = "^8.1.7"
+# {% endif %}
+
+# {% if cookiecutter.has_scripting  == "y" %}
+# Scripting
+pypyp = "^1.1.0"
+shshsh = "^1.0.5"
+pipetools = "^1.1.0"
 # {% endif %}
 
 # {% if cookiecutter.has_trio == "y" %}
 # Trio
-trio = "^0.22.0"
-anyio = "^3.6.2"
+trio = "^0.22.2"
+anyio = "^4.0.0"
 async-cache = "^1.1.1"
 # {% endif %}
 
@@ -35,8 +42,8 @@ pendulum = "^2.1.2"
 # {% endif %}
 
 # Logging
-structlog = "^22.1.0" # logging library at https://www.structlog.org/en/stable/getting-started.html
-rich = "^12.6.0"  # UX improvement for structlog
+structlog = "^23.1.0" # logging library at https://www.structlog.org/en/stable/getting-started.html
+rich = "^13.5.3"  # UX improvement for structlog
 
 # {% if cookiecutter.has_cli == "y" %}
 # CLI

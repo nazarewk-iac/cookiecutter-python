@@ -1,6 +1,8 @@
 import json
-from pathlib import Path
 import subprocess
+import time
+
+from pathlib import Path
 
 
 def cleanup_file(path: Path):
@@ -48,7 +50,8 @@ def main():
         cleanup_file(path)
 
     subprocess.check_call(["poetry", "lock"])
-    # subprocess.check_call(["nix", "flake", "lock"]) # fails for whatever reason
+    time.sleep(0.5)
+    subprocess.check_call(["nix", "flake", "lock"])  # fails for whatever reason
 
 
 main()
