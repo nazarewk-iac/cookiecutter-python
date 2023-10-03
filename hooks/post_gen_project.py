@@ -64,9 +64,9 @@ def main():
     subprocess.check_call(["poetry", "lock"])
 
     if is_git_repo(cwd):
-        subprocess.check_call(["git", "add", "--", cwd])
         # `nix flake` requires files to be `git add`ed
-        subprocess.check_call(["nix", "flake", "lock"])
+        subprocess.check_call(["git", "add", "--", cwd])
+    subprocess.check_call(["nix", "flake", "lock"])
 
 
 main()
