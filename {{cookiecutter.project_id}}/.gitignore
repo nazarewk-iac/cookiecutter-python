@@ -1,11 +1,11 @@
-# ignore everything by default except directories and .gitignores
-#  note: it wouldn't look inside of any directory otherwise
-#  note: you can debug ignores using git check-ignore -v testfile.json
+# ignore everything by default
 *
+# do not ignore directories (still ignores their content)
 !*/
-!/.gitignore
-# ignore all dot-directories by default
+# still ignore directiories with a leading dot
 .*/
+# do not ignore .gitignore files
+!.gitignore
 
 !*.md
 !*.nix
