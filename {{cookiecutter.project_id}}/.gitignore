@@ -4,14 +4,13 @@
 *
 !*/
 !/.gitignore
-
-.pytest_cache/
+# ignore all dot-directories by default
+.*/
 
 !*.md
 !*.nix
 !*.py
 !/.envrc
 !/flake.lock
-!/flake.nix
 !poetry.lock
 !pyproject.toml

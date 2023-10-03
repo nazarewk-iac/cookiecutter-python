@@ -38,6 +38,18 @@ def cleanup_file(path: Path):
         path.write_bytes(b"\n".join(output_lines))
 
 
+def is_git_repo(path: Path):
+    try:
+        subprocess.check_call(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            cwd=path,
+            stdout=subprocess.DEVNULL,
+        )
+    except subprocess.CalledProcessError:
+        return False
+    return True
+
+
 def main():
     cc = json.loads("""{{ cookiecutter | tojson(indent=2) }}""")
     cwd = Path.cwd()
@@ -50,8 +62,11 @@ def main():
         cleanup_file(path)
 
     subprocess.check_call(["poetry", "lock"])
-    time.sleep(0.5)
-    subprocess.check_call(["nix", "flake", "lock"])  # fails for whatever reason
+
+    if is_git_repo(cwd):
+        subprocess.check_call(["git", "add", "--", cwd])
+        # `nix flake` requires files to be `git add`ed
+        subprocess.check_call(["nix", "flake", "lock"])
 
 
 main()
