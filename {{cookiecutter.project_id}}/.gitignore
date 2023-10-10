@@ -7,10 +7,20 @@
 # do not ignore .gitignore files
 !.gitignore
 
-!*.md
+# {% if cookiecutter.has_jetbrains  == "y" %}
+# shareable Jetbrains files
+!.idea/modules.xml
+!.idea/watcherTasks.xml
+!.idea/vcs.xml
+!.idea/misc.xml
+!*.iml
+# {% endif %}
+
 !*.nix
-!*.py
 !/.envrc
 !/flake.lock
+
+!*.md
+!*.py
 !poetry.lock
 !pyproject.toml

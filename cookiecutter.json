@@ -11,6 +11,7 @@
   "env_prefix": "{{ cookiecutter.project_slug.upper() }}",
   "pypi_username": "{{ cookiecutter.github_username }}",
   "license": "MIT",
+  "has_jetbrains": "y",
   "has_cli": "y",
   "has_http": "n",
   "has_scripting": "n",

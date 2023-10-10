@@ -1,8 +1,11 @@
 import structlog
+
 # {% if cookiecutter.has_trio != "y" %}
 import click
+
 # {% else %}
 import asyncclick as click
+
 # {% endif %}
 
 from . import configure
@@ -21,7 +24,7 @@ def main():
 
 # {% else %}
 async def main():
-    logger.warning("Hello, world!", has_trio=True)
+    logger.warning("Hello, async world!", has_trio=True)
 
 
 # {% endif %}
