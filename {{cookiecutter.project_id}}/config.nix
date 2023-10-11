@@ -1,32 +1,44 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  inherit (pkgs) lib;
-
-  attrs = {
-    python = pkgs."python{{cookiecutter.python_version.replace('.', '')}}";
+  attrs.common = {
+    python = pkgs."python311";
     projectDir = ./.;
     pyproject = ./pyproject.toml;
     poetrylock = ./poetry.lock;
-    buildInputs = with pkgs; [
-      # additional non-python dependencies
-    ];
     overrides = pkgs.poetry2nix.defaultPoetryOverrides.extend (final: prev: {
-      # fido2 = prev.fido2.overridePythonAttrs (old: { buildInputs = (old.buildInputs or [ ]) ++ [ final.poetry ]; });
+      # shshsh = prev.shshsh.overridePythonAttrs (old: { buildInputs = (old.buildInputs or [ ]) ++ [ final.poetry ]; });
       # yubikey-manager = prev.yubikey-manager.overridePythonAttrs (old: { buildInputs = (old.buildInputs or [ ]) ++ [ final.poetry ]; });
     });
   };
 
-  cfg = builtins.fromTOML (builtins.readFile attrs.pyproject);
-  name = cfg.tool.poetry.name;
-  pkg = pkgs.poetry2nix.mkPoetryApplication (attrs // { });
-  env = pkgs.poetry2nix.mkPoetryEnv (attrs // {
-    # TODO: env doesn't pass down arbitrary arguments (such as buildInputs) so need to handle it some other way
+  attrs.app = attrs.common // {
+    buildInputs = with pkgs; [
+      # additional non-python dependencies
+      #jq
+      #difftastic
+    ];
+  };
+  attrs.env = attrs.common // {
     # groups = [ "dev" "test" ];
-    editablePackageSources = { "${name}" = attrs.projectDir; };
-  });
+    editablePackageSources = { "${name}" = attrs.common.projectDir; };
+  };
+
+  pyproject = builtins.fromTOML (builtins.readFile attrs.common.pyproject);
+  name = pyproject.tool.poetry.name;
+
+  app = pkgs.poetry2nix.mkPoetryApplication attrs.app;
+  env = pkgs.poetry2nix.mkPoetryEnv attrs.env;
+
+  interpreter = pkgs.writeShellApplication {
+    name = "${name}-python";
+    runtimeInputs = [ env ] ++ attrs.app.buildInputs;
+    text = ''exec python "$@"'';
+  };
+
+  devPkgs = [ env interpreter ];
 in
 {
-  inherit pkg env cfg;
-  inherit (attrs) python;
-  bin = "${pkg}/bin/${name}";
+  inherit attrs pyproject;
+  inherit app env interpreter devPkgs;
+  inherit (attrs.common) python;
 }

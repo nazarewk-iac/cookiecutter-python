@@ -52,15 +52,10 @@
         devenv.shells.default = {
           name = "default";
 
-          languages.python.enable = true;
-          languages.python.package = conf.python;
-          languages.python.poetry.enable = true;
-          languages.python.poetry.install.installRootPackage = true;
-
           # https://devenv.sh/reference/options/
           packages = with pkgs; [
             black
-          ];
+          ] ++ conf.dev.pkgs;
         };
         # inspired by https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
         # usage: nix run '.#repl'
