@@ -55,7 +55,7 @@
           # https://devenv.sh/reference/options/
           packages = with pkgs; [
             black
-          ] ++ conf.dev.pkgs;
+          ] ++ conf.devPkgs;
         };
         # inspired by https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
         # usage: nix run '.#repl'
