@@ -20,6 +20,7 @@ let
   name = cfg.tool.poetry.name;
   pkg = pkgs.poetry2nix.mkPoetryApplication (attrs // { });
   env = pkgs.poetry2nix.mkPoetryEnv (attrs // {
+    # TODO: env doesn't pass down arbitrary arguments (such as buildInputs) so need to handle it some other way
     # groups = [ "dev" "test" ];
     editablePackageSources = { "${name}" = attrs.projectDir; };
   });
