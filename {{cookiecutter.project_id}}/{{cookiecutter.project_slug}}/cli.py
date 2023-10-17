@@ -31,10 +31,9 @@ async def main():
 
 
 if __name__ == "__main__":
-    _kwargs = dict(
+    main(
         auto_envvar_prefix="{{ cookiecutter.env_prefix }}",
         # {% if cookiecutter.has_trio == "y" %}
         _anyio_backend="trio",
         # {% endif %}
     )
-    main(**_kwargs)

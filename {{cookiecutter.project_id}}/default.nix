@@ -1,1 +1,1 @@
-{ pkgs, ... }@args: (import ./config.nix args).pkg
+{ pkgs, ... }: (pkgs.callPackage ./config.nix { }).app

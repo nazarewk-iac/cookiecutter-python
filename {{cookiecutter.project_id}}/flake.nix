@@ -37,17 +37,24 @@
 
     perSystem = { config, self', inputs', pkgs, system, ... }:
       let
-        conf = import ./config.nix { inherit pkgs; };
+        conf = pkgs.callPackage ./config.nix { };
       in
       {
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [
             self.overlays.default
+            (final: prev: {
+              nix2container = inputs'.nix2container.packages.nix2container;
+            })
           ];
         };
 
-        packages.default = conf.pkg;
+        packages.default = conf.app;
+        packages.dev = conf.dev;
+        packages.poetryApp = conf.poetryApp;
+        # nix run '.#container.copyToPodman'
+        packages.container = conf.container;
 
         devenv.shells.default = {
           name = "default";
@@ -55,7 +62,8 @@
           # https://devenv.sh/reference/options/
           packages = with pkgs; [
             black
-          ] ++ conf.devPkgs;
+            conf.dev
+          ];
         };
         # inspired by https://github.com/NixOS/nix/issues/3803#issuecomment-748612294
         # usage: nix run '.#repl'
