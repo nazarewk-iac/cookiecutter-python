@@ -62,7 +62,6 @@ let
               ''
                 src="''${BASH_SOURCE[0]}"
                 dir="''${BASH_SOURCE[0]%/*}"
-                out="''${dir%/*}"
 
                 var="${placeholder "out"}"
                 # strip /nix/store/
@@ -76,11 +75,11 @@ let
 
                 if [ "''${!var:-"no"}" != "yes" ] ; then
                   export "$var"="yes"
-                  export PATH="$out/.bin:$PATH"
+                  export PATH="$dir/.wrapped:$PATH"
                   ${bashEnv}
                   ${initScript}
                 fi
-                exec "''${src##*/}" "$@"
+                exec "$dir/.wrapped/''${src##*/}" "$@"
               '';
           };
         in
@@ -90,9 +89,10 @@ let
       name = "${name}-newsymlinks";
       paths = paths;
       postBuild = ''
-        mv "$out/bin" "$out/.bin"
+        mv "$out/bin" "$out/.wrapped"
         mkdir -p "$out/bin"
-        for file in "$out/.bin"/* ; do
+        mv "$out/.wrapped" "$out/bin/.wrapped"
+        for file in "$out/bin/.wrapped"/* ; do
           ln -s "${wrapper}" "$out/bin/''${file##*/}"
         done
       '';
