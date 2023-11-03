@@ -15,7 +15,10 @@ logger: structlog.stdlib.BoundLogger = structlog.get_logger()
 
 
 @click.command(
-    context_settings={"show_default": True},
+    context_settings=dict(
+        show_default=True,
+        auto_envvar_prefix="{{ cookiecutter.env_prefix }}",
+    ),
 )
 # {% if cookiecutter.has_trio != "y" %}
 def main():
@@ -32,7 +35,6 @@ async def main():
 
 if __name__ == "__main__":
     main(
-        auto_envvar_prefix="{{ cookiecutter.env_prefix }}",
         # {% if cookiecutter.has_trio == "y" %}
         _anyio_backend="trio",
         # {% endif %}
