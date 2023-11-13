@@ -8,9 +8,6 @@ import asyncclick as click
 
 # {% endif %}
 
-from . import configure
-
-configure.logging()
 logger: structlog.stdlib.BoundLogger = structlog.get_logger()
 
 
