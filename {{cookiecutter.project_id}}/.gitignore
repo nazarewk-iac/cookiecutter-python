@@ -9,11 +9,12 @@
 
 # {% if cookiecutter.has_jetbrains  == "y" %}
 # shareable Jetbrains files
-!.idea/modules.xml
-!.idea/watcherTasks.xml
-!.idea/vcs.xml
-!.idea/misc.xml
 !*.iml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/runConfigurations/*.xml
+!.idea/vcs.xml
+!.idea/watcherTasks.xml
 # {% endif %}
 
 !*.nix

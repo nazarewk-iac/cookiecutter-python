@@ -41,7 +41,7 @@
 
         packages.default = pkgs."{{ cookiecutter.project_id }}";
         packages.dev = conf.dev;
-        packages.poetryApp = conf.poetryApp;
+        packages.poetryApp = conf.poetry.app;
         # nix run '.#container.copyToPodman'
         packages.container = conf.container;
 

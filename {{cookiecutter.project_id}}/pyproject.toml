@@ -43,7 +43,8 @@ pendulum = "^2.1.2"
 
 # Logging
 structlog = "^23.1.0" # logging library at https://www.structlog.org/en/stable/getting-started.html
-rich = "^13.5.3"  # UX improvement for structlog
+rich = "^13.5.3"  # UX improvement for structlog"
+colorama = "^0.4.6"
 
 # {% if cookiecutter.has_cli == "y" %}
 # CLI
