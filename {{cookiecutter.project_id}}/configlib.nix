@@ -23,7 +23,7 @@ let
   };
   dev = wrapBinaries {
     name = "dev-${poetry.name}";
-    paths = [ poetry.dev ] ++ clean.attrs.app.buildInputs or [ ];
+    paths = [ poetry.dev ] ++ clean.attrs.app.propagatedBuildInputs or [ ];
     initScript = ''
       cd "''${DEVENV_ROOT:-"''${BASH_SOURCE[0]%/${poetry.name}/*}/${poetry.name}"}"
     '';

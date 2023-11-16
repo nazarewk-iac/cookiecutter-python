@@ -21,8 +21,8 @@ let
   };
 
   attrs.app = {
-    buildInputs = with pkgs; [
-      # additional non-python dependencies
+    propagatedBuildInputs = with pkgs; [
+      # additional non-python runtime dependencies
       #jq
       #difftastic
     ];
